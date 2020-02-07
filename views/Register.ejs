@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>SignUp</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body{
             height: 100vh;
-            background-image: url('/img/cake1.jpg');
+            background-image: url('/img/cake3.jpg');
         }
         .log {
             display: flex;
@@ -43,7 +43,8 @@
         }
 
         .login-form input[type="password"],
-        .login-form input[type="text"] {
+        .login-form input[type="text"] ,
+        .login-form input[type="email"]{
             width: 100%;
             padding: 15px;
             border: 1px solid #dddddd;
@@ -82,12 +83,13 @@
         <div class="card .mx-auto">
 
             <div class="login-form">
-                <h1 class="display-5"><b>Login</b></h1>
-                <form action="auth" method="POST">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
+                <h1 class="display-5"><b>SignUp</b></h1>
+                <form action="signup" method="POST">
+                    <input type="text" name="name" placeholder="Username" required>
+                    <input type="email" name="mail" placeholder="Email" required>
+                    <input type="password" name="pwd" placeholder="Password" required>
                     <!-- <input type="submit"> -->
-                    <button class="btn">Login</button>
+                    <button class="btn">SignUp</button>
                 </form>
             </div>
         </div>
