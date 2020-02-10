@@ -26,7 +26,7 @@
         .card {
             /* border-color: #1a1514; */
             border-width: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
 
         }
 
@@ -93,7 +93,7 @@
                     </li>
                     <li class="nav-item">
                         <% if(name){ %>
-                        <a class="nav-link" href="#" style="color: white"><%= name %></a>
+                        <a class="nav-link" href="#" style="color: white" ><%= name %></a>
                         <% }else{ %>
                             <a class="nav-link" href="/login" style="color: white">Login</a>
                             <% } %>
@@ -102,12 +102,8 @@
             </div>
         </nav>
     </div>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1500">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1950">
+        
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="/img/ca.jpg" class="d-block w-100" alt="...">
@@ -119,14 +115,7 @@
                 <img src="/img/cc.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+        
     </div>
    
     <div class="main">

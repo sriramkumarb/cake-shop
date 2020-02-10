@@ -66,48 +66,83 @@ app.post('/auth', (req, res) => {
    var user = req.body.username;
    var pwd = req.body.password;
 
-   if (loguser.find({ name: user, pwd: pwd })) {
-      req.session.loggedin = true;
-      req.session.username = user;
-      res.redirect('/')
-   }
-})
+   // loguser.find({ name:user }, (err, data) => {
+     
+      
+   //    if (err) {
+   //       throw err
+   //    }
+   //    else {
+   //       if (data) {
+   //          req.session.loggedin = true;
+   //          req.session.username = user;
+   //          console.log("user", user);
+            
+   //          res.redirect('/')
+   //       }
+   //       else {
+   //          console.log("wrong")
 
-app.get('/', (req, res) => {
-   Cakes.find({}, (err, data) => {
-      if (err) {
-         throw err
-      } else {
-         if (req.session.loggedin) {
-            res.render('index', { items: data, name: req.session.username })
+   //       }
+   //    }
+   
+   // })
+   loguser.findOne({name:user}).then(user=>{
+      if(user){
+         if(user.pwd == pwd){
+            console.log(user);
+            req.session.username = user.name;
+            req.session.loggedin = true;
+            res.redirect('/')
          }
-         else {
-            res.render('index', { items: data, name: null })
+         else{
+            console.log("incorrect password")
+            res.render('login')
          }
       }
-   });
-})
-
-app.get('/signup', (req, res) => {
-   res.render('Register')
-})
-
-app.post('/signup', (req, res) => {
-   var signup = loguser(req.body).save((err, data) => {
-      if (err) {
-         throw err
-      } else {
-         res.redirect('login')
-
+      else{
+         console.log("no user found")
       }
    })
-
 })
 
-app.post('/login', (req, res) => {
-   res.render('login')
-})
+   app.get('/', (req, res) => {
+      Cakes.find({}, (err, data) => {
+         if (err) {
+            throw err
+         } else {
+            if (req.session.loggedin) {
+               res.render('index', { items: data, name: req.session.username })
+               console.log('user',req.session.username);
+               
+            }
+            else {
+               res.render('index', { items: data, name: null })
+            }
+         }
+      });
+   })
 
-app.listen(5000, () => {
-   console.log('Server is running!');
-});
+   app.get('/signup', (req, res) => {
+      res.render('Register')
+   })
+
+   app.post('/signup', (req, res) => {
+      var signup = loguser(req.body).save((err, data) => {
+         if (err) {
+            throw err
+         } else {
+            res.redirect('login')
+
+         }
+      })
+
+   })
+
+   app.post('/login', (req, res) => {
+      res.render('login')
+   })
+
+   app.listen(5000, () => {
+      console.log('Server is running!');
+   });
