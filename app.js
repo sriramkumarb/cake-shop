@@ -5,6 +5,7 @@ const session = require('express-session');
 
 var app = express();
 
+require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
@@ -17,7 +18,7 @@ app.use(session({
 }));
 
 
-mongoose.connect('mongodb+srv://haran:selvaraj@haran-v98ur.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect(process.env.DBURL ,{ useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
     if (err) {
         throw err
     } else {
