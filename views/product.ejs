@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Product</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            height: 100vh;
+            background-image: url('/img/cake3.jpg');
+        }
+        .log {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .card {
+            margin-top: auto;
+            margin-bottom: auto;
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-bottom: 60px;
+            box-shadow: 1px 1px 5px 0 rgba(75, 74, 74, 0.623);
+            background-color: rgba(255, 255, 255, 0.856);
+
+        }
+
+        .login-form {
+            width: 300px;
+            margin: 0 auto;
+            font-family: Tahoma, Geneva, sans-serif;
+        }
+
+        .login-form h1 {
+            text-align: center;
+            color: #4d4d4d;
+            font-size: 24px;
+            padding: 20px 0 20px 0;
+        }
+
+        .login-form input[type="password"],
+        .login-form input[type="text"] ,
+        .login-form input[type="email"]{
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .login-form input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .btn{
+            width: 100%;
+            padding: 15px;
+            background-color: #535b63;
+            border: 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            font-weight: bold;
+            color: #ffffff;
+
+        }
+    </style>
+
+</head>
+
+<body >
+    <div class="log">
+
+        <div class="card .mx-auto">
+
+            <div class="login-form">
+                <h1 class="display-5"><b>Product</b></h1>
+                <form action="product" method="POST">
+                    <input type="text" name="item" placeholder="item" required>
+                    <input type="text" name="price" placeholder="price" required>
+                    <input type="text" name="image" placeholder="image" required>
+                    <input type="text" name="type" placeholder="type" required>
+                    <button class="btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

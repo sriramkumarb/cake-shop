@@ -17,18 +17,18 @@ app.use(session({
 }));
 
 
-mongoose.connect('mongodb://localhost', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-   if (err) {
-      throw err
-   } else {
-      console.log('MongoDb Connected');
-
-   }
+mongoose.connect('mongodb+srv://haran:selvaraj@haran-v98ur.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+    if (err) {
+        throw err
+    } else {
+        console.log('MongoDb Connected');
+        
+    }
 });
 
 var cake = new mongoose.Schema({
    item: String,
-   price: Number,
+   price: String,
    img: String,
    type: String
 });
@@ -133,6 +133,26 @@ app.post('/auth', (req, res) => {
             throw err
          } else {
             res.redirect('login')
+
+         }
+      })
+
+   })
+
+   app.get('/product' ,(req,res) => {
+      res.render('product')
+   })
+
+   app.post('/product' , (req,res) => {
+
+      console.log(req.body)
+
+      var product = Cakes(req.body).save((err, data) => {
+         if (err) {
+            throw err
+         } else {
+            console.log(data)
+            res.redirect('product')
 
          }
       })
