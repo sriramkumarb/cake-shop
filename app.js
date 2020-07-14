@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -5,7 +7,6 @@ const session = require('express-session');
 
 var app = express();
 
-require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
 app.use(bodyParser.json());
@@ -18,13 +19,13 @@ app.use(session({
 }));
 
 
-mongoose.connect(process.env.DBURL ,{ useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-    if (err) {
-        throw err
-    } else {
-        console.log('MongoDb Connected');
-        
-    }
+mongoose.connect(process.env.DBURL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+   if (err) {
+      throw err
+   } else {
+      console.log('MongoDb Connected');
+
+   }
 });
 
 var cake = new mongoose.Schema({
@@ -68,8 +69,8 @@ app.post('/auth', (req, res) => {
    var pwd = req.body.password;
 
    // loguser.find({ name:user }, (err, data) => {
-     
-      
+
+
    //    if (err) {
    //       throw err
    //    }
@@ -78,7 +79,7 @@ app.post('/auth', (req, res) => {
    //          req.session.loggedin = true;
    //          req.session.username = user;
    //          console.log("user", user);
-            
+
    //          res.redirect('/')
    //       }
    //       else {
@@ -86,84 +87,84 @@ app.post('/auth', (req, res) => {
 
    //       }
    //    }
-   
+
    // })
-   loguser.findOne({name:user}).then(user=>{
-      if(user){
-         if(user.pwd == pwd){
+   loguser.findOne({ name: user }).then(user => {
+      if (user) {
+         if (user.pwd == pwd) {
             console.log(user);
             req.session.username = user.name;
             req.session.loggedin = true;
             res.redirect('/')
          }
-         else{
+         else {
             console.log("incorrect password")
             res.render('login')
          }
       }
-      else{
+      else {
          console.log("no user found")
       }
    })
 })
 
-   app.get('/', (req, res) => {
-      Cakes.find({}, (err, data) => {
-         if (err) {
-            throw err
-         } else {
-            if (req.session.loggedin) {
-               res.render('index', { items: data, name: req.session.username })
-               console.log('user',req.session.username);
-               
-            }
-            else {
-               res.render('index', { items: data, name: null })
-            }
-         }
-      });
-   })
-
-   app.get('/signup', (req, res) => {
-      res.render('Register')
-   })
-
-   app.post('/signup', (req, res) => {
-      var signup = loguser(req.body).save((err, data) => {
-         if (err) {
-            throw err
-         } else {
-            res.redirect('login')
+app.get('/', (req, res) => {
+   Cakes.find({}, (err, data) => {
+      if (err) {
+         throw err
+      } else {
+         if (req.session.loggedin) {
+            res.render('index', { items: data, name: req.session.username })
+            console.log('user', req.session.username);
 
          }
-      })
-
-   })
-
-   app.get('/product' ,(req,res) => {
-      res.render('product')
-   })
-
-   app.post('/product' , (req,res) => {
-
-      console.log(req.body)
-
-      var product = Cakes(req.body).save((err, data) => {
-         if (err) {
-            throw err
-         } else {
-            console.log(data)
-            res.redirect('product')
-
+         else {
+            res.render('index', { items: data, name: null })
          }
-      })
-
-   })
-
-   app.post('/login', (req, res) => {
-      res.render('login')
-   })
-
-   app.listen(5000, () => {
-      console.log('Server is running!');
+      }
    });
+})
+
+app.get('/signup', (req, res) => {
+   res.render('Register')
+})
+
+app.post('/signup', (req, res) => {
+   var signup = loguser(req.body).save((err, data) => {
+      if (err) {
+         throw err
+      } else {
+         res.redirect('login')
+
+      }
+   })
+
+})
+
+app.get('/product', (req, res) => {
+   res.render('product')
+})
+
+app.post('/product', (req, res) => {
+
+   console.log(req.body)
+
+   var product = Cakes(req.body).save((err, data) => {
+      if (err) {
+         throw err
+      } else {
+         console.log(data)
+         res.redirect('product')
+
+      }
+   })
+
+})
+
+app.post('/login', (req, res) => {
+   res.render('login')
+})
+
+app.listen(3000, () => {
+   console.log('Server is running!');
+});
